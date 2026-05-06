@@ -47,6 +47,7 @@ app.get('/lembretes', (req, res) => {
 
 app.post('/eventos', (req, res) => {
   const evento = req.body
+  console.log(evento)
   funcoes[evento.tipo](evento.dados)
   res.end()
 })

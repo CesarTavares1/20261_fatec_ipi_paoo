@@ -16,6 +16,8 @@ app.post('/eventos', (req, res) => {
   axios.post('http://localhost:5000/eventos', evento)
   //enviar para o mss na porta 6000
   axios.post('http://localhost:6000/eventos', evento) 
+  //enviar para o mss na porta 7000
+  axios.post('http://localhost:7000/eventos', evento)
   //encerrar com código 200
   res.status(200).end()
 })
