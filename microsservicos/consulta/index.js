@@ -1,36 +1,11 @@
 const axios = require('axios')
 const express = require('express')
 const app = express()
-//middleware
 app.use(express.json())
 
 const baseConsolidada = {}
-
-//mapa de funções
-//para cada tipo de evento possível, uma função associada
-/*
-  {
-    1: {
-      id: 1,
-      texto: 'Fazer café',
-      observacoes: [
-        {
-          id: 10001,
-          texto: 'agora',
-          lembreteId: 1
-        },
-        {
-          id: 10002,
-          texto: 'sem açúcar',
-          lembreteId: 1
-        }
-      ]
-    }
-  }
-*/
 const funcoes = {
   LembreteCriado: (lembrete) => {
-    //faça essa implementação
     baseConsolidada[lembrete.id] = lembrete
   },
   ObservacaoCriada: (observacao) => {

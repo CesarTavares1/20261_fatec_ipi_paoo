@@ -1,39 +1,29 @@
 const axios = require('axios')
 const express = require('express')
 const app = express()
-app.use(express.json()) //função middleware
+app.use(express.json())
 const lembretes = {}
-let id = 0
+let id = 1
 app.get('/lembretes', (req, res) => {
   res.json(lembretes)
 })
 
-/*
-{
-  1: {
-    id: 1,
-    texto: 'fazer café'
-  },
-  2: {
-    id: 2,
-    texto: 'natação'
-  }
-}
-*/
 app.post('/lembretes', async (req, res) => {
-  id++
   const texto = req.body.texto
-  lembretes[id] = {id, texto}
-  await axios.post('http://localhost:10000/eventos', {
-    tipo: 'LembreteCriado',
-    dados: {id, texto}
-  })
-  res.json(lembretes[id])
+  try {
+    await axios.post('http://localhost:10000/eventos', {
+      tipo: 'LembreteCriado',
+      dados: { id, texto }
+    })
+    id++
+    lembretes[id] = { id, texto }
+    return res.json(lembretes[id])
+  } catch (erro) {
+      console.log("O lembrete não pôde ser criado.")
+      return res.status(403).json(erro.response.data)
+  }
 })
 
-//fazer um endpoint para receber eventos
-//ele apenas exibe num console.log o evento recebido
-//e termina
 app.post('/eventos', async (req, res) => {
   try{
     const evento = req.body
