@@ -57,6 +57,14 @@ app.post('/eventos', async (req, res) => {
   res.end()
 })
 
+app.get('/saude', (req, res) => {
+    const json = {
+    microsserviço: "observacoes",
+    status: "funcionando"
+    }
+    res.status(200).json(json)
+})
+
 const port = 5000
 app.listen(port, () => {
   console.log(`Observações. Porta ${port}.`)

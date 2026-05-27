@@ -22,5 +22,14 @@ app.post('/eventos', async (req, res) => {
   catch(e){}
   res.end()
 })
+
+app.get('/saude', (req, res) => {
+    const json = {
+    microsserviço: "classificacao",
+    status: "funcionando"
+    }
+    res.status(200).json(json)
+})
+
 const port = 7000
 app.listen(port, () => console.log(`Classificação. Porta ${port}`))
